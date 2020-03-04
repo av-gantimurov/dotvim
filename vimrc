@@ -7,7 +7,9 @@ syntax on                  " Enable syntax highlighting.
 "set shiftwidth  =4         " >> indents by 4 spaces.
 "set shiftround             " >> indents to next multiple of 'shiftwidth'.
 
-set backspace   =indent,eol,start  " Make backspace work as you would expect.
+set autoread                " Reload buffer if detected changes via external
+                            " command. Used with checktime
+set backspace   =indent,eol,start  " Make backspace work as you would expect
 set hidden                 " Switch between buffers without having to save first.
 set laststatus  =2         " Always show statusline.
 set display     =lastline  " Show as much as possible of the last line.
@@ -28,7 +30,7 @@ set wrapscan               " Searches wrap around end-of-file.
 set report      =0         " Always report changed lines.
 set synmaxcol   =200       " Only highlight the first 200 columns.
 
-set modeline
+set modeline                " Turn on :vim settings in comments
 
 set helplang=ru
 
@@ -45,7 +47,7 @@ if has("mouse")
 endif
 set mousehide       " Hide mouse pointer on insert mode."
 
-"show number at every line 
+"show number at every line
 set number
 
 " установить keymap, чтобы по Ctrl+^ переключался на русский и обратно
@@ -69,10 +71,11 @@ menu Encoding.ucs-2le :e ++enc=ucs-2le<CR>
 menu Encoding.utf-8   :e ++enc=utf-8<CR> 
 map <F12> :emenu Encoding.<Tab>
 
-:nnoremap <F5> "=strftime("%b %Y")<CR>P
-:nnoremap <S-F5> "=strftime("%Y-%m-%d %H:%M")<CR>P
+:nnoremap <F5> "=strftime("%b %Y")<CR>p
+:nnoremap <S-F5> "=strftime("%Y-%m-%d %H:%M")<CR>p
 :inoremap <S-F5> <C-R>"=strftime("%Y-%m-%d %H:%M")<CR>
 :inoremap <F5> <C-R>=strftime("%b %Y")<CR>
+:nnoremap <F4> :echo strftime("%F %T",expand("<cword>"))<CR>
 
 " Put all temporary files under the same directory.
 " https://github.com/mhinz/vim-galore#handling-backup-swap-undo-and-viminfo-files
@@ -95,6 +98,7 @@ if has("autocmd")
     augroup templates
         autocmd BufNewFile *.yar 0r ~/.vim/templates/skeleton.yar
         autocmd BufNewFile *.py 0r ~/.vim/templates/skeleton.py
+        autocmd BufNewFile src.json 0r ~/.vim/templates/skeleton.src.json
     augroup end
 endif
 
@@ -146,17 +150,6 @@ else
   " Additional plugins here.
   call minpac#add('nvie/vim-flake8' )
   call minpac#add('lifepillar/vim-cheat40', {'type': 'opt'})
-  "call minpac#add('nvie/vim-flake8', {'type': 'opt'})
-  "call minpac#add('airblade/vim-gitgutter')
-"  call minpac#add('altercation/vim-colors-solarized')
-"  call minpac#add('itchyny/lightline.vim')
-"  call minpac#add('prettier/vim-prettier')
-"  call minpac#add('tpope/vim-commentary')
-"  call minpac#add('tpope/vim-endwise')
-"  call minpac#add('tpope/vim-fugitive')
-"  call minpac#add('tpope/vim-repeat')
-"  call minpac#add('tpope/vim-surround')
-  "
 
   " minpac utility commands
   command! PackUpdate call minpac#update()
@@ -172,4 +165,5 @@ filetype plugin indent on " Load plugins according to detected filetype.
 " Yara Syntax
 autocmd BufNewFile,BufRead *.yar,*.yara setlocal filetype=yara
 
+" Add :Man functionality
 runtime ftplugin/man.vim
