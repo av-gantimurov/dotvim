@@ -39,7 +39,7 @@ syntax keyword yaraKeyword all and any ascii at condition entrypoint false files
 syntax keyword yaraKeywordMeta author description hash reference date rev tags minimum_yara score required_modules
 syntax keyword yaraRuleSection condition meta strings
 
-syntax match yaraMetaHash /hash[0-9]*/
+syntax match yaraMetaHash /\<hash[0-9]*\>/
 
 " Identifiers
 syntax match yaraIdentifier /$[a-zA-Z0-9_]*/
