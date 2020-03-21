@@ -80,9 +80,16 @@ map <F12> :emenu Encoding.<Tab>
 " Put all temporary files under the same directory.
 " https://github.com/mhinz/vim-galore#handling-backup-swap-undo-and-viminfo-files
 set backup
+if isdirectory($HOME . '/.vim/files/backup') == 0
+    call mkdir($HOME . '/.vim/files/backup', 'p')
+endif
 set backupdir   =$HOME/.vim/files/backup/
 set backupext   =-vimbackup
 set backupskip  =
+" Change swap directory.
+if isdirectory($HOME . '/.vim/files/swap') == 0
+    call mkdir($HOME . '/.vim/files/swap', 'p')
+endif
 set directory   =$HOME/.vim/files/swap//
 set updatecount =100
 
@@ -90,6 +97,9 @@ set updatecount =100
 " from book "Modern.Vim.2018" tip 24
 set undofile
 if !has('nvim')
+    if isdirectory($HOME . '/.vim/files/undo') == 0
+        call mkdir($HOME . '/.vim/files/undo', 'p')
+    endif
     set undodir=$HOME/.vim/files/undo
 endif
 
