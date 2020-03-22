@@ -148,7 +148,9 @@ packadd minpac
 if !exists('*minpac#init')
   " minpac is not available.
     autocmd VimEnter *  echohl WarningMsg |
-        \ echom " minpac plugin not found !" |
+        \ echom "minpac plugin not found"|
+        \ echom "try 'git clone https://github.com/k-takata/minpac.git
+        \ ~/.vim/pack/minpac/opt/minpac'" |
         \ echohl None
 
 else
