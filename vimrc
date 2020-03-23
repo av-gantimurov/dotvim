@@ -60,7 +60,7 @@ set imsearch=0
 set encoding=utf-8                                  " set charset translation encoding
 set termencoding=utf-8                              " set terminal encoding
 set fileencoding=utf-8                              " set save encoding
-set fileencodings=utf8,koi8r,cp1251,cp866,ucs-2le   " список предполагаемых кодировок, 
+set fileencodings=utf8,koi8r,cp1251,cp866,ucs-2le   " список предполагаемых кодировок,
                                                     " в порядке предпочтения
 set wildmenu
 set wcm=<Tab>
@@ -68,7 +68,7 @@ menu Encoding.koi8-r  :e ++enc=koi8-r<CR>
 menu Encoding.cp1251  :e ++enc=cp1251<CR>
 menu Encoding.cp866   :e ++enc=cp866<CR>
 menu Encoding.ucs-2le :e ++enc=ucs-2le<CR>
-menu Encoding.utf-8   :e ++enc=utf-8<CR> 
+menu Encoding.utf-8   :e ++enc=utf-8<CR>
 map <F12> :emenu Encoding.<Tab>
 
 :nnoremap <F5> "=strftime("%b %Y")<CR>p
@@ -93,7 +93,7 @@ endif
 set directory   =$HOME/.vim/files/swap//
 set updatecount =100
 
-" set undo settings 
+" set undo settings
 " from book "Modern.Vim.2018" tip 24
 set undofile
 if !has('nvim')
@@ -104,60 +104,11 @@ if !has('nvim')
 endif
 
 " start with template if create new file with extension
-if has("autocmd")
-    augroup templates
-        autocmd BufNewFile *.yar 0r ~/.vim/templates/skeleton.yar
-        autocmd BufNewFile *.py 0r ~/.vim/templates/skeleton.py
-        autocmd BufNewFile src.json 0r ~/.vim/templates/skeleton.src.json
-    augroup end
-endif
 
-" nowrite undofile if buffer from /tmp directory 
-" in case editing password, shadow, sudoers etc.
-augroup vimrc
-    autocmd!
-    autocmd BufWritePre /tmp/* setlocal noundofile
-augroup END
-
-" Disables number in terminal window in Vim
-" https://vi.stackexchange.com/questions/17368/how-could-i-turn-off-the-terminal-line-number-while-keep-the-editor-line-number
-autocmd TerminalOpen * setlocal nonumber
-
-"https://vim.fandom.com/wiki/Faster_loading_of_large_files
-" file is large from 10mb
-let g:LargeFile = 1024 * 1024 * 10
-augroup LargeFile
-    autocmd BufReadPre * let f=getfsize(expand("<afile>")) |
-        \ if f > g:LargeFile || f == -2 | call LargeFile() | endif
-augroup END
-
-function LargeFile()
-    " no syntax highlighting etc
-    set eventignore+=FileType
-    " save memory when other file is viewed
-    setlocal bufhidden=unload
-    " is read-only (write with :w new_filename)
-    setlocal buftype=nowrite
-    " no undo possible
-    setlocal undolevels=-1
-    " display message
-    autocmd VimEnter *  echohl WarningMsg |
-        \ echo "The file is larger than " .
-        \ (g:LargeFile / 1024 / 1024) . " MB, so some options are changed " .
-        \ "(see .vimrc for details)." | echohl None
-endfunction
 
 "minpac
 packadd minpac
-if !exists('*minpac#init')
-  " minpac is not available.
-    autocmd VimEnter *  echohl WarningMsg |
-        \ echom "minpac plugin not found"|
-        \ echom "try 'git clone https://github.com/k-takata/minpac.git
-        \ ~/.vim/pack/minpac/opt/minpac'" |
-        \ echohl None
-
-else
+if exists('*minpac#init')
   " minpac is available.
   " init with verbosity 3 to see minpac work
   call minpac#init({'verbose': 3})
@@ -176,6 +127,71 @@ else
   " ...
 endif
 
+if has("autocmd")
+    if !exists('*minpac#init')
+      " minpac is not available.
+        autocmd VimEnter *  echohl WarningMsg |
+            \ echom "minpac plugin not found"|
+            \ echom "try 'git clone https://github.com/k-takata/minpac.git
+            \ ~/.vim/pack/minpac/opt/minpac'" |
+            \ echohl None
+    endif
+
+    let templates_dir = $HOME . '/.vim/templates'
+    let templates = {
+        \ 'src.json'     : 'skeleton.src.json',
+        \ '*.yar'        : 'skeleton.yar',
+        \ '*.py'         : 'skeleton.py',
+        \}
+    augroup templates
+        for [extension, filename] in items(templates)
+            let template_filename = templates_dir . "/" . filename
+            if filereadable(template_filename)
+                " echo extension template_filename
+                execute "autocmd BufNewFile " extension "0r" template_filename
+            endif
+        endfor
+        " autocmd BufNewFile *.yar 0r ~/.vim/templates/skeleton.yar
+        " autocmd BufNewFile *.py 0r ~/.vim/templates/skeleton.py
+        " autocmd BufNewFile src.json 0r ~/.vim/templates/skeleton.src.json
+    augroup end
+
+    " nowrite undofile if buffer from /tmp directory
+    " in case editing password, shadow, sudoers etc.
+    augroup vimrc
+        autocmd!
+        autocmd BufWritePre /tmp/* setlocal noundofile
+    augroup END
+
+    " Disables number in terminal window in Vim
+    " https://vi.stackexchange.com/questions/17368/how-could-i-turn-off-the-terminal-line-number-while-keep-the-editor-line-number
+    autocmd TerminalOpen * setlocal nonumber
+
+    "https://vim.fandom.com/wiki/Faster_loading_of_large_files
+    " file is large from 10mb
+    let g:LargeFile = 1024 * 1024 * 10
+    augroup LargeFile
+        autocmd BufReadPre * let f=getfsize(expand("<afile>")) |
+            \ if f > g:LargeFile || f == -2 | call LargeFile() | endif
+    augroup END
+
+    function LargeFile()
+        " no syntax highlighting etc
+        set eventignore+=FileType
+        " save memory when other file is viewed
+        setlocal bufhidden=unload
+        " is read-only (write with :w new_filename)
+        setlocal buftype=nowrite
+        " no undo possible
+        setlocal undolevels=-1
+        " display message
+        autocmd VimEnter *  echohl WarningMsg |
+            \ echo "The file is larger than " .
+            \ (g:LargeFile / 1024 / 1024) . " MB, so some options are changed " .
+            \ "(see .vimrc for details)." | echohl None
+    endfunction
+
+endif
 " Syntax
 filetype plugin indent on " Load plugins according to detected filetype.
 " Yara Syntax
