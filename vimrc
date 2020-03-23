@@ -109,6 +109,10 @@ augroup vimrc
     autocmd BufWritePre /tmp/* setlocal noundofile
 augroup END
 
+" Disables number in terminal window in Vim
+" https://vi.stackexchange.com/questions/17368/how-could-i-turn-off-the-terminal-line-number-while-keep-the-editor-line-number
+autocmd TerminalOpen * setlocal nonumber
+
 "https://vim.fandom.com/wiki/Faster_loading_of_large_files
 " file is large from 10mb
 let g:LargeFile = 1024 * 1024 * 10
