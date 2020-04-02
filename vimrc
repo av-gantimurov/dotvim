@@ -1,5 +1,7 @@
 " most settings from https://raw.githubusercontent.com/mhinz/vim-galore/master/static/minimal-vimrc.vim
-syntax on                  " Enable syntax highlighting.
+if has('syntax')
+    syntax on                  " Enable syntax highlighting.
+endif
 
 set autoindent             " Indent according to previous line.
 set expandtab              " Use spaces instead of tabs.
