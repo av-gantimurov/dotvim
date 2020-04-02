@@ -1,11 +1,11 @@
 " most settings from https://raw.githubusercontent.com/mhinz/vim-galore/master/static/minimal-vimrc.vim
 syntax on                  " Enable syntax highlighting.
 
-"set autoindent             " Indent according to previous line.
-"set expandtab              " Use spaces instead of tabs.
-"set softtabstop =4         " Tab key indents by 4 spaces.
-"set shiftwidth  =4         " >> indents by 4 spaces.
-"set shiftround             " >> indents to next multiple of 'shiftwidth'.
+set autoindent             " Indent according to previous line.
+set expandtab              " Use spaces instead of tabs.
+set softtabstop =4         " Tab key indents by 4 spaces.
+set shiftwidth  =4         " >> indents by 4 spaces.
+set shiftround             " >> indents to next multiple of 'shiftwidth'.
 
 set autoread                " Reload buffer if detected changes via external
                             " command. Used with checktime
@@ -115,7 +115,8 @@ if exists('*minpac#init')
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
   " Additional plugins here.
-  call minpac#add('nvie/vim-flake8' )
+  call minpac#add('nvie/vim-flake8')
+  call minpac#add('tpope/vim-fugitive')
   call minpac#add('lifepillar/vim-cheat40', {'type': 'opt'})
 
   " minpac utility commands
@@ -165,7 +166,9 @@ if has("autocmd")
 
     " Disables number in terminal window in Vim
     " https://vi.stackexchange.com/questions/17368/how-could-i-turn-off-the-terminal-line-number-while-keep-the-editor-line-number
-    autocmd TerminalOpen * setlocal nonumber
+    if exists('##TerminalOpen')
+        autocmd TerminalOpen * setlocal nonumber
+    endif
 
     "https://vim.fandom.com/wiki/Faster_loading_of_large_files
     " file is large from 10mb
