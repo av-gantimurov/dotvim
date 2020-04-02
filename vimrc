@@ -52,26 +52,33 @@ set mousehide       " Hide mouse pointer on insert mode."
 "show number at every line
 set number
 
-" установить keymap, чтобы по Ctrl+^ переключался на русский и обратно
-set keymap=russian-jcukenwin
-" по умолчанию - латинская раскладка
-set iminsert=0
-" по умолчанию - латинская раскладка при поиске
-set imsearch=0
+if has('keymap')
+    " установить keymap, чтобы по Ctrl+^ переключался на русский и обратно
+    set keymap=russian-jcukenwin
+    " по умолчанию - латинская раскладка
+    set iminsert=0
+    " по умолчанию - латинская раскладка при поиске
+    set imsearch=0
+endif
 
-set encoding=utf-8                                  " set charset translation encoding
-set termencoding=utf-8                              " set terminal encoding
-set fileencoding=utf-8                              " set save encoding
-set fileencodings=utf8,koi8r,cp1251,cp866,ucs-2le   " список предполагаемых кодировок,
-                                                    " в порядке предпочтения
-set wildmenu
-set wcm=<Tab>
-menu Encoding.koi8-r  :e ++enc=koi8-r<CR>
-menu Encoding.cp1251  :e ++enc=cp1251<CR>
-menu Encoding.cp866   :e ++enc=cp866<CR>
-menu Encoding.ucs-2le :e ++enc=ucs-2le<CR>
-menu Encoding.utf-8   :e ++enc=utf-8<CR>
-map <F12> :emenu Encoding.<Tab>
+if has('multi_byte')
+    set encoding=utf-8                                  " set charset translation encoding
+    set termencoding=utf-8                              " set terminal encoding
+    set fileencoding=utf-8                              " set save encoding
+    set fileencodings=utf8,koi8r,cp1251,cp866,ucs-2le   " список предполагаемых кодировок,
+                                                        " в порядке предпочтения
+endif
+
+if has('wildmenu')
+    set wildmenu
+    set wcm=<Tab>
+    menu Encoding.koi8-r  :e ++enc=koi8-r<CR>
+    menu Encoding.cp1251  :e ++enc=cp1251<CR>
+    menu Encoding.cp866   :e ++enc=cp866<CR>
+    menu Encoding.ucs-2le :e ++enc=ucs-2le<CR>
+    menu Encoding.utf-8   :e ++enc=utf-8<CR>
+    map <F12> :emenu Encoding.<Tab>
+endif
 
 :nnoremap <F5> "=strftime("%b %Y")<CR>p
 :nnoremap <S-F5> "=strftime("%Y-%m-%d %H:%M")<CR>p
@@ -107,9 +114,11 @@ endif
 
 " start with template if create new file with extension
 
-
-"minpac
-packadd minpac
+"Packages
+if has('packadd')
+    "minpac
+    silent! packadd minpac
+endif
 if exists('*minpac#init')
   " minpac is available.
   " init with verbosity 3 to see minpac work
