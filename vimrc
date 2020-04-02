@@ -14,6 +14,25 @@ set autoread                " Reload buffer if detected changes via external
 set backspace   =indent,eol,start  " Make backspace work as you would expect
 set hidden                 " Switch between buffers without having to save first.
 set laststatus  =2         " Always show statusline.
+if has('statusline')
+    set statusline =
+    " Buffer number
+    set statusline +=[%n]
+    " File description
+    set statusline +=%f\ %h%m%r%w
+    " Filetype
+    set statusline +=%y
+    " Name of the current function (needs taglist.vim)
+    " set statusline +=\ [Fun(%{Tlist_Get_Tagname_By_Line()})]
+    " https://stackoverflow.com/questions/5983906/vim-conditionally-use-fugitivestatusline-function-in-vimrc
+    set statusline+=\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}
+    " Date of the last time the file was saved
+    set statusline +=\ %{strftime(\"[%d/%m/%y\ %T]\",getftime(expand(\"%:p\")))}
+    " Total number of lines in the file
+    set statusline +=%=%-10L
+    " Line, column and percentage
+    set statusline +=%=%-14.(%l,%c%V%)\ %P
+endif
 set display     =lastline  " Show as much as possible of the last line.
 
 set showmode               " Show current mode in command-line.
@@ -35,13 +54,6 @@ set synmaxcol   =200       " Only highlight the first 200 columns.
 set modeline                " Turn on :vim settings in comments
 
 set helplang=ru
-
-set list                   " Show non-printable characters.
-if has('multi_byte') && &encoding ==# 'utf-8'
-    let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±,trail:·'
-else
-    let &listchars = 'tab:> ,extends:>,precedes:<,nbsp:.,eol:$,trail:·'
-endif
 
 "Enable mouse support
 if has("mouse")
@@ -67,6 +79,14 @@ if has('multi_byte')
     set fileencoding=utf-8                              " set save encoding
     set fileencodings=utf8,koi8r,cp1251,cp866,ucs-2le   " список предполагаемых кодировок,
                                                         " в порядке предпочтения
+endif
+
+set list                   " Show non-printable characters.
+
+if has('multi_byte') && &encoding ==# 'utf-8'
+    let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±,trail:·'
+else
+    let &listchars = 'tab:> ,extends:>,precedes:<,nbsp:.,eol:$,trail:·'
 endif
 
 if has('wildmenu')
@@ -115,7 +135,7 @@ endif
 " start with template if create new file with extension
 
 "Packages
-if has('packadd')
+if has('eval')
     "minpac
     silent! packadd minpac
 endif
@@ -206,6 +226,7 @@ if has("autocmd")
     endfunction
 
 endif
+
 " Syntax
 filetype plugin indent on " Load plugins according to detected filetype.
 " Yara Syntax
