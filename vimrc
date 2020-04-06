@@ -162,7 +162,7 @@ if has("autocmd")
     if !exists('*minpac#init')
       " minpac is not available.
         autocmd VimEnter *  echohl WarningMsg |
-            \ echom "minpac plugin not found"|
+            \ echom "minpac plugin not found" |
             \ echom "try 'git clone https://github.com/k-takata/minpac.git
             \ ~/.vim/pack/minpac/opt/minpac'" |
             \ echohl None
@@ -196,8 +196,11 @@ if has("autocmd")
 
     " Disables number in terminal window in Vim
     " https://vi.stackexchange.com/questions/17368/how-could-i-turn-off-the-terminal-line-number-while-keep-the-editor-line-number
-    if exists('##TerminalOpen')
-        autocmd TerminalOpen * setlocal nonumber
+    if has('terminal') && exists('##TerminalOpen')
+        autocmd TerminalOpen * if &buftype == 'terminal' |
+                                \ setlocal nonumber |
+                                \ setlocal bufhidden=hide |
+                                \ endif
     endif
 
     "https://vim.fandom.com/wiki/Faster_loading_of_large_files
