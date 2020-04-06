@@ -28,9 +28,9 @@ if has('statusline')
     " set statusline +=\ [Fun(%{Tlist_Get_Tagname_By_Line()})]
     " Buffer number
     " Total number of lines in the file
-    set statusline +=%=BN:%n/%-L
+    set statusline +=%=BN:%n
     " Line, column and percentage
-    set statusline +=\ %=%-(%l,%c%V%)\ %P
+    set statusline +=\ %=%-(%L/%l,%c%V%)\ %P
 endif
 set display     =lastline  " Show as much as possible of the last line.
 
