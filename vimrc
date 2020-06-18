@@ -14,6 +14,10 @@ set autoread                " Reload buffer if detected changes via external
 set backspace   =indent,eol,start  " Make backspace work as you would expect
 set hidden                 " Switch between buffers without having to save first.
 set laststatus  =2         " Always show statusline.
+if has('colorcolumn')
+    set colorcolumn=+1,+2,+3  "Highlight columns after 'textwidth' column
+endif
+
 if has('statusline')
     set statusline =
     " Date of the last time the file was saved
