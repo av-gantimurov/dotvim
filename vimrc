@@ -1,7 +1,4 @@
 " most settings from https://raw.githubusercontent.com/mhinz/vim-galore/master/static/minimal-vimrc.vim
-if has('syntax')
-    syntax on                  " Enable syntax highlighting.
-endif
 
 set autoindent             " Indent according to previous line.
 set expandtab              " Use spaces instead of tabs.
@@ -152,6 +149,7 @@ if exists('*minpac#init')
   call minpac#add('nvie/vim-flake8')
   call minpac#add('tpope/vim-fugitive')
   call minpac#add('lifepillar/vim-cheat40', {'type': 'opt'})
+  call minpac#add('chrisbra/csv.vim')
 
   " minpac utility commands
   command! PackUpdate call minpac#update()
@@ -161,6 +159,8 @@ if exists('*minpac#init')
   " Plugin settings here.
   " ...
 endif
+
+let g:csv_delim_test=';,|'
 
 if has("autocmd")
     if !exists('*minpac#init')
@@ -237,6 +237,10 @@ endif
 filetype plugin indent on " Load plugins according to detected filetype.
 " Yara Syntax
 autocmd BufNewFile,BufRead *.yar,*.yara setlocal filetype=yara
+
+if has('syntax')
+    syntax on                  " Enable syntax highlighting.
+endif
 
 " Add :Man functionality
 runtime ftplugin/man.vim
