@@ -177,6 +177,7 @@ if has("autocmd")
         \ 'src.json'     : 'skeleton.src.json',
         \ '*.yar'        : 'skeleton.yar',
         \ '*.py'         : 'skeleton.py',
+        \ 'ida*.py'      : 'skeleton.ida.py',
         \}
     augroup templates
         for [extension, filename] in items(templates)
