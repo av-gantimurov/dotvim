@@ -244,3 +244,7 @@ endif
 
 " Add :Man functionality
 runtime ftplugin/man.vim
+
+" My private rules here
+let priv_vimrc = $MYVIMRC . ".private"
+exec "source " . priv_vimrc
