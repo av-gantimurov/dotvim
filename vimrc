@@ -149,7 +149,6 @@ if exists('*minpac#init')
     call minpac#add('tpope/vim-fugitive')
     call minpac#add('lifepillar/vim-cheat40', {'type': 'opt'})
     call minpac#add('chrisbra/csv.vim')
-    call minpac#add('JamshedVesuna/vim-markdown-preview')
 
     " minpac utility commands
     command! PackUpdate call minpac#update()
