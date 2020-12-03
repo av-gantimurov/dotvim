@@ -134,43 +134,45 @@ endif
 
 " start with template if create new file with extension
 
-"Packages
 if has('eval')
-    "minpac
     silent! packadd minpac
+    " minpac is available.
+    " init with verbosity 3 to see minpac work
+    silent! call minpac#init({'verbose': 3})
 endif
+
 if exists('*minpac#init')
-  " minpac is available.
-  " init with verbosity 3 to see minpac work
-  call minpac#init({'verbose': 3})
-  call minpac#add('k-takata/minpac', {'type': 'opt'})
+    call minpac#add('k-takata/minpac', {'type': 'opt'})
 
-  " Additional plugins here.
-  call minpac#add('nvie/vim-flake8')
-  call minpac#add('tpope/vim-fugitive')
-  call minpac#add('lifepillar/vim-cheat40', {'type': 'opt'})
-  call minpac#add('chrisbra/csv.vim')
+    " Additional plugins here.
+    call minpac#add('nvie/vim-flake8')
+    call minpac#add('tpope/vim-fugitive')
+    call minpac#add('lifepillar/vim-cheat40', {'type': 'opt'})
+    call minpac#add('chrisbra/csv.vim')
+    call minpac#add('JamshedVesuna/vim-markdown-preview')
 
-  " minpac utility commands
-  command! PackUpdate call minpac#update()
-  command! PackClean call minpac#clean()
-  command! PackStatus call minpac#status()
+    " minpac utility commands
+    command! PackUpdate call minpac#update()
+    command! PackClean call minpac#clean()
+    command! PackStatus call minpac#status()
 
-  " Plugin settings here.
-  " ...
-endif
-
-let g:csv_delim_test=';,|'
-
-if has("autocmd")
-    if !exists('*minpac#init')
-      " minpac is not available.
+    " Plugin settings here.
+    " ...
+else
+    if has('autocmd')
         autocmd VimEnter *  echohl WarningMsg |
-            \ echom "minpac plugin not found" |
+            \ echom "minpac loading fault." |
             \ echom "try 'git clone https://github.com/k-takata/minpac.git
-            \ ~/.vim/pack/minpac/opt/minpac'" |
+            \ ~/.vim/pack/minpac/opt/minpac' if not installed" |
             \ echohl None
     endif
+endif
+
+if has('eval')
+    let g:csv_delim_test=';,|'
+endif
+
+if has("autocmd")
 
     let templates_dir = $HOME . '/.vim/templates'
     let templates = {
@@ -179,6 +181,7 @@ if has("autocmd")
         \ '*.py'         : 'skeleton.py',
         \ 'ida*.py'      : 'skeleton.ida.py',
         \}
+
     augroup templates
         for [extension, filename] in items(templates)
             let template_filename = templates_dir . "/" . filename
@@ -235,17 +238,23 @@ if has("autocmd")
 endif
 
 " Syntax
-filetype plugin indent on " Load plugins according to detected filetype.
-" Yara Syntax
-autocmd BufNewFile,BufRead *.yar,*.yara setlocal filetype=yara
 
+if has('eval')
+    filetype plugin indent on " Load plugins according to detected filetype.
+    " Add :Man functionality
+    " Yara Syntax
+    autocmd BufNewFile,BufRead *.yar,*.yara setlocal filetype=yara
+endif
 if has('syntax')
     syntax on                  " Enable syntax highlighting.
 endif
 
-" Add :Man functionality
-runtime ftplugin/man.vim
+if has('eval')
+    runtime ftplugin/man.vim
+endif
 
 " My private rules here
-let priv_vimrc = $MYVIMRC . ".private"
-exec "source " . priv_vimrc
+if has('eval')
+    let priv_vimrc = $MYVIMRC . ".private"
+    exec "source " . priv_vimrc
+endif
