@@ -132,7 +132,6 @@ if !has('nvim')
     set undodir=$HOME/.vim/files/undo
 endif
 
-" start with template if create new file with extension
 
 if has('eval')
     silent! packadd minpac
@@ -173,6 +172,7 @@ endif
 
 if has("autocmd")
 
+" start with template if create new file with extension
     let templates_dir = $HOME . '/.vim/templates'
     let templates = {
         \ 'src.json'     : 'skeleton.src.json',
