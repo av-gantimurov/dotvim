@@ -9,3 +9,10 @@ set hlsearch
 set autoindent
 set ignorecase
 set smartcase
+
+set makeprg=card-report\ --strict\ --nocolor\ -sO/tmp/report\ %
+set errorformat^=%*[^:]:\ %f:%l:%c\ %m
+set errorformat^=%*[^:]:\ %f:%l\ %m
+set errorformat^=%*[^:]:\ %f:\ %m
+set errorformat^=%*[^:]:\ %f>\ %m
+set errorformat^=%*[^:]:\ %f>\ %s:\ %m
