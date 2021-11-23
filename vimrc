@@ -97,13 +97,13 @@ if has('wildmenu')
     menu Encoding.cp866   :e ++enc=cp866<CR>
     menu Encoding.ucs-2le :e ++enc=ucs-2le<CR>
     menu Encoding.utf-8   :e ++enc=utf-8<CR>
-    map <F12> :emenu Encoding.<Tab>
+    map <S-F12> :emenu Encoding.<Tab>
 endif
 
-:nnoremap <F5> "=strftime("%b %Y")<CR>p
+:nnoremap <F5> "=strftime("%Y-%m-%d")<CR>p
 :nnoremap <S-F5> "=strftime("%Y-%m-%d %H:%M")<CR>p
-:inoremap <S-F5> <C-R>"=strftime("%Y-%m-%d %H:%M")<CR>
-:inoremap <F5> <C-R>=strftime("%b %Y")<CR>
+:inoremap <S-F5> <C-R>=strftime("%Y-%m-%d %H:%M")<CR>
+:inoremap <F5> <C-R>=strftime("%Y-%m-%d")<CR>
 :nnoremap <F4> :echo strftime("%F %T",expand("<cword>"))<CR>
 
 " Put all temporary files under the same directory.
@@ -149,6 +149,7 @@ if exists('*minpac#init')
     call minpac#add('lifepillar/vim-cheat40', {'type': 'opt'})
     call minpac#add('chrisbra/csv.vim')
     call minpac#add('dense-analysis/ale')
+    " call minpac#add('rust-lang/rust.vim')
 
     " minpac utility commands
     command! PackUpdate call minpac#update()
@@ -177,6 +178,7 @@ if has("autocmd")
     let templates_dir = $HOME . '/.vim/templates'
     let templates = {
         \ 'src.json'     : 'skeleton.src.json',
+        \ 'src.yaml'     : 'skeleton.src.yaml',
         \ '*.yar'        : 'skeleton.yar',
         \ '*.py'         : 'skeleton.py',
         \ 'ida*.py'      : 'skeleton.ida.py',
