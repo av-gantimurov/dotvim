@@ -100,8 +100,8 @@ if has('wildmenu')
     map <S-F12> :emenu Encoding.<Tab>
 endif
 
-:nnoremap <F5> "=strftime("%Y-%m-%d")<CR>p
-:nnoremap <S-F5> "=strftime("%Y-%m-%d %H:%M")<CR>p
+:nnoremap <F5> "=strftime("%Y-%m-%d")<CR>P
+:nnoremap <S-F5> "=strftime("%Y-%m-%d %H:%M")<CR>P
 :inoremap <S-F5> <C-R>=strftime("%Y-%m-%d %H:%M")<CR>
 :inoremap <F5> <C-R>=strftime("%Y-%m-%d")<CR>
 :nnoremap <F4> :echo strftime("%F %T",expand("<cword>"))<CR>
