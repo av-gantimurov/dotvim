@@ -89,23 +89,6 @@ else
     let &listchars = 'tab:> ,extends:>,precedes:<,nbsp:.,eol:$,trail:·'
 endif
 
-if has('wildmenu')
-    set wildmenu
-    set wcm=<Tab>
-    menu Encoding.koi8-r  :e ++enc=koi8-r<CR>
-    menu Encoding.cp1251  :e ++enc=cp1251<CR>
-    menu Encoding.cp866   :e ++enc=cp866<CR>
-    menu Encoding.ucs-2le :e ++enc=ucs-2le<CR>
-    menu Encoding.utf-8   :e ++enc=utf-8<CR>
-    map <S-F12> :emenu Encoding.<Tab>
-endif
-
-:nnoremap <F5> "=strftime("%Y-%m-%d")<CR>P
-:nnoremap <S-F5> "=strftime("%Y-%m-%d %H:%M")<CR>P
-:inoremap <S-F5> <C-R>=strftime("%Y-%m-%d %H:%M")<CR>
-:inoremap <F5> <C-R>=strftime("%Y-%m-%d")<CR>
-:nnoremap <F4> :echo strftime("%F %T",expand("<cword>"))<CR>
-
 " Put all temporary files under the same directory.
 " https://github.com/mhinz/vim-galore#handling-backup-swap-undo-and-viminfo-files
 set backup
@@ -247,16 +230,24 @@ if has('eval')
     " Yara Syntax
     autocmd BufNewFile,BufRead *.yar,*.yara setlocal filetype=yara
 endif
-if has('syntax')
-    syntax on                  " Enable syntax highlighting.
-endif
 
 if has('eval')
     runtime ftplugin/man.vim
 endif
 
-" My private rules here
+if has('syntax')
+    syntax on                  " Enable syntax highlighting.
+endif
+
 if has('eval')
+    " My private rules here
     let priv_vimrc = $MYVIMRC . ".private"
     exec "source " . priv_vimrc
+
+    " hotkeys in separate file
+    let hotkeys_rc = $MYVIMRC . ".hotkeys"
+    exec "source " . hotkeys_rc
 endif
+
+
+let $BASH_ENV = "~/.bash_aliases"

@@ -1,0 +1,19 @@
+:nnoremap <F5> "=strftime("%Y-%m-%d")<CR>P
+:nnoremap <S-F5> "=strftime("%Y-%m-%d %H:%M")<CR>P
+:inoremap <S-F5> <C-R>=strftime("%Y-%m-%d %H:%M")<CR>
+:inoremap <F5> <C-R>=strftime("%Y-%m-%d")<CR>
+:nnoremap <F4> :echo strftime("%F %T",expand("<cword>"))<CR>
+:inoremap <F3> <esc>:set paste!<cr>i
+:nnoremap <F3> :set paste!<cr>
+
+if has('wildmenu')
+    set wildmenu
+    set wcm=<Tab>
+    menu Encoding.koi8-r  :e ++enc=koi8-r<CR>
+    menu Encoding.cp1251  :e ++enc=cp1251<CR>
+    menu Encoding.cp866   :e ++enc=cp866<CR>
+    menu Encoding.ucs-2le :e ++enc=ucs-2le<CR>
+    menu Encoding.utf-8   :e ++enc=utf-8<CR>
+    map <S-F12> :emenu Encoding.<Tab>
+endif
+
