@@ -132,6 +132,7 @@ if exists('*minpac#init')
     call minpac#add('lifepillar/vim-cheat40', {'type': 'opt'})
     call minpac#add('chrisbra/csv.vim')
     call minpac#add('dense-analysis/ale')
+    call minpac#add('ConradIrwin/vim-bracketed-paste')
     " call minpac#add('rust-lang/rust.vim')
 
     " minpac utility commands
