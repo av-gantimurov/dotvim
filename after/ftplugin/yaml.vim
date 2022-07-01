@@ -5,14 +5,15 @@ set tabstop=2
 set shiftwidth=2
 
 set incsearch
-set hlsearch 
+set hlsearch
 set autoindent
 set ignorecase
 set smartcase
 
 set makeprg=card-report\ --strict\ --no-color\ -sO/tmp/report\ %
-set errorformat^=%*[^:]:\ %f:%l:%c\ %m
-set errorformat^=%*[^:]:\ %f:%l\ %m
 set errorformat^=%*[^:]:\ %f:\ %m
+set errorformat^=%*[^:]:\ %f:%l\ %m
+set errorformat^=%*[^:]:\ %f:%l:%c\ %m
 set errorformat^=%*[^:]:\ %f>\ %m
-set errorformat^=%*[^:]:\ %f>\ %s:\ %m
+set errorformat^=%*[^:]:\ при\ валидации\ %f>\ %m
+set errorformat^=%*[^:]:\ %f>\ найдены\ %m
