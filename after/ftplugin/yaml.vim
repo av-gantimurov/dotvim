@@ -17,3 +17,6 @@ set errorformat^=%*[^:]:\ %f:%l:%c\ %m
 set errorformat^=%*[^:]:\ %f>\ %m
 set errorformat^=%*[^:]:\ при\ валидации\ %f>\ %m
 set errorformat^=%*[^:]:\ %f>\ найдены\ %m
+
+
+noremap <F9> :write<CR>:!card-report -D % <CR><CR>
