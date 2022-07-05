@@ -17,3 +17,7 @@ if has('wildmenu')
     map <S-F12> :emenu Encoding.<Tab>
 endif
 
+" ALE hotkeys
+nmap <silent> <leader>aj :ALENext<cr>
+nmap <silent> <leader>ak :ALEPrevious<cr>
+nmap <silent> <leader>af :ALEFix<cr>
