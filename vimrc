@@ -250,5 +250,18 @@ if has('eval')
     exec "source " . hotkeys_rc
 endif
 
+" if has('autocmd')
+"     autocmd VimEnter * if exists(":ALEEnable") |
+"         \ echom 'Ale FOUND' |
+"         \ endif
+" 
+" endif
+
+let g:ale_fixers = {
+\   'python': ['isort', 'yapf', 'blake'],
+\}
+
+let g:ale_fix_on_save = 1
+
 
 let $BASH_ENV = "~/.bash_aliases"
