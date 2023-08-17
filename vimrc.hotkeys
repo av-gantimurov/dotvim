@@ -3,6 +3,8 @@
 :inoremap <S-F5> <C-R>=strftime("%Y-%m-%d %H:%M")<CR>
 :inoremap <F5> <C-R>=strftime("%Y-%m-%d")<CR>
 :nnoremap <F4> :echo strftime("%F %T",expand("<cword>"))<CR>
+:nnoremap <F6> :echo printf("0x%X",expand("<cword>"))<CR>
+:nnoremap <S-F6> :echo printf("%d",expand("<cword>"))<CR>
 :inoremap <F3> <esc>:set paste!<cr>i
 :nnoremap <F3> :set paste!<cr>
 
@@ -21,3 +23,17 @@ endif
 nmap <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
 nmap <silent> <leader>af :ALEFix<cr>
+
+
+" dasht
+" search related docsets
+nnoremap <silent> <Leader>K :call Dasht(dasht#cursor_search_terms())<Return>
+
+" search ALL the docsets
+nnoremap <silent> <Leader><Leader>K :call Dasht(dasht#cursor_search_terms(), '!')<Return>
+
+" search related docsets
+vnoremap <silent> <Leader>K y:<C-U>call Dasht(getreg(0))<Return>
+
+" search ALL the docsets
+vnoremap <silent> <Leader><Leader>K y:<C-U>call Dasht(getreg(0), '!')<Return>
