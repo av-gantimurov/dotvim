@@ -1,5 +1,6 @@
 " most settings from https://raw.githubusercontent.com/mhinz/vim-galore/master/static/minimal-vimrc.vim
 
+set background=dark
 set autoindent             " Indent according to previous line.
 set expandtab              " Use spaces instead of tabs.
 set softtabstop =4         " Tab key indents by 4 spaces.
@@ -40,8 +41,8 @@ set showcmd                " Show already typed keys when more are expected.
 set incsearch              " Highlight while searching with / or ?.
 set hlsearch               " Keep matches highlighted.
 
-set ttyfast                " Faster redrawing.
-set lazyredraw             " Only redraw when necessary.
+" set ttyfast                " Faster redrawing.
+" set lazyredraw             " Only redraw when necessary.
 
 set splitbelow             " Open new windows below the current window.
 set splitright             " Open new windows right of the current window.
@@ -133,6 +134,7 @@ if exists('*minpac#init')
     call minpac#add('chrisbra/csv.vim')
     call minpac#add('dense-analysis/ale')
     call minpac#add('ConradIrwin/vim-bracketed-paste')
+    call minpac#add('sunaku/vim-dasht')
     " call minpac#add('rust-lang/rust.vim')
 
     " minpac utility commands
@@ -256,11 +258,22 @@ endif
 "         \ endif
 " 
 " endif
+"
 
-let g:ale_fixers = {
-\   'python': ['isort', 'yapf', 'blake'],
+" Netrw settings
+"
+let g:netrw_winsize = 30
+
+let g:ale_linters = {
+\   'rust': ['cargo', 'rls']
 \}
 
+let g:ale_rust_rls_toolchain = 'stable'
+
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint'],
+\}
 let g:ale_fix_on_save = 1
 
 
