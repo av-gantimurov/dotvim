@@ -1,5 +1,6 @@
 " most settings from https://raw.githubusercontent.com/mhinz/vim-galore/master/static/minimal-vimrc.vim
 
+set term=kitty
 set background=dark
 set autoindent             " Indent according to previous line.
 set expandtab              " Use spaces instead of tabs.
@@ -34,13 +35,13 @@ if has('statusline')
     " Line, column and percentage
     set statusline +=\ %=%-(%L/%l,%c%V%)\ %P
 endif
+
 set display     =lastline  " Show as much as possible of the last line.
 
 set showmode               " Show current mode in command-line.
 set showcmd                " Show already typed keys when more are expected.
 set incsearch              " Highlight while searching with / or ?.
 set hlsearch               " Keep matches highlighted.
-
 " set ttyfast                " Faster redrawing.
 " set lazyredraw             " Only redraw when necessary.
 
@@ -64,15 +65,6 @@ set mousehide       " Hide mouse pointer on insert mode."
 
 "show number at every line
 set number
-
-if has('keymap')
-    " установить keymap, чтобы по Ctrl+^ переключался на русский и обратно
-    set keymap=russian-jcukenwin
-    " по умолчанию - латинская раскладка
-    set iminsert=0
-    " по умолчанию - латинская раскладка при поиске
-    set imsearch=0
-endif
 
 if has('multi_byte')
     set encoding=utf-8                                  " set charset translation encoding
@@ -135,6 +127,8 @@ if exists('*minpac#init')
     call minpac#add('dense-analysis/ale')
     call minpac#add('ConradIrwin/vim-bracketed-paste')
     call minpac#add('sunaku/vim-dasht')
+    call minpac#add('vim-airline/vim-airline')
+    call minpac#add('lyokha/vim-xkbswitch')
     " call minpac#add('rust-lang/rust.vim')
 
     " minpac utility commands
@@ -252,13 +246,6 @@ if has('eval')
     exec "source " . hotkeys_rc
 endif
 
-" if has('autocmd')
-"     autocmd VimEnter * if exists(":ALEEnable") |
-"         \ echom 'Ale FOUND' |
-"         \ endif
-" 
-" endif
-"
 
 " Netrw settings
 "
@@ -277,4 +264,46 @@ let g:ale_fixers = {
 let g:ale_fix_on_save = 1
 
 
+let g:XkbSwitchEnabled = 1
+
 let $BASH_ENV = "~/.bash_aliases"
+
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" unicode symbols
+" let g:airline_left_sep = '»'
+" let g:airline_left_sep = '▶'
+" let g:airline_right_sep = '«'
+" let g:airline_right_sep = '◀'
+" let g:airline_symbols.colnr = ' ㏇:'
+" let g:airline_symbols.colnr = ' ℅:'
+" let g:airline_symbols.crypt = '🔒'
+" let g:airline_symbols.linenr = '☰'
+" let g:airline_symbols.linenr = ' ␊:'
+" let g:airline_symbols.linenr = ' ␤:'
+" let g:airline_symbols.linenr = '¶'
+" let g:airline_symbols.maxlinenr = ''
+" let g:airline_symbols.maxlinenr = '㏑'
+" let g:airline_symbols.branch = '⎇'
+" let g:airline_symbols.paste = 'ρ'
+" let g:airline_symbols.paste = 'Þ'
+" let g:airline_symbols.paste = '∥'
+" let g:airline_symbols.spell = 'Ꞩ'
+" let g:airline_symbols.notexists = 'Ɇ'
+" let g:airline_symbols.notexists = '∄'
+" let g:airline_symbols.whitespace = 'Ξ'
+
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.colnr = ' ℅:'
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ' :'
+let g:airline_symbols.maxlinenr = '☰ '
+let g:airline_symbols.dirty='⚡'
