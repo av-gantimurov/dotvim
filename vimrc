@@ -1,6 +1,6 @@
 " most settings from https://raw.githubusercontent.com/mhinz/vim-galore/master/static/minimal-vimrc.vim
 
-set term=kitty
+" set term=kitty
 set background=dark
 set autoindent             " Indent according to previous line.
 set expandtab              " Use spaces instead of tabs.
