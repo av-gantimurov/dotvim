@@ -122,14 +122,12 @@ if exists('*minpac#init')
     " Additional plugins here.
     call minpac#add('nvie/vim-flake8')
     call minpac#add('tpope/vim-fugitive')
-    call minpac#add('lifepillar/vim-cheat40', {'type': 'opt'})
     call minpac#add('chrisbra/csv.vim')
     call minpac#add('dense-analysis/ale')
     call minpac#add('ConradIrwin/vim-bracketed-paste')
     call minpac#add('sunaku/vim-dasht')
     call minpac#add('vim-airline/vim-airline')
     call minpac#add('lyokha/vim-xkbswitch')
-    " call minpac#add('rust-lang/rust.vim')
 
     " minpac utility commands
     command! PackUpdate call minpac#update()
@@ -265,6 +263,8 @@ let g:ale_fix_on_save = 1
 
 
 let g:XkbSwitchEnabled = 1
+" let g:XkbSwitchNLayout = 'us'
+let g:XkbSwitchKeymapNames = {'Russian' : 'ru'}
 
 let $BASH_ENV = "~/.bash_aliases"
 
@@ -307,3 +307,34 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ' :'
 let g:airline_symbols.maxlinenr = '☰ '
 let g:airline_symbols.dirty='⚡'
+
+let g:airline_powerline_fonts = 1 "Включить поддержку Powerline шрифтов
+" let g:airline#extensions#keymap#enabled = 0 "Не показывать текущий маппинг
+" let g:airline_section_z = "\ue0a1:%l/%L Col:%c" "Кастомная графа положения курсора
+let g:Powerline_symbols='unicode' "Поддержка unicode
+" let g:airline#extensions#xkblayout#enabled = 0 "Про это позже расскажу
+let g:airline#extensions#xkblayout#short_codes = {
+\ 'English (US)': 'US',
+\ 'Russian': 'RU',
+\}
+
+let g:airline_mode_map = {
+    \ '__'     : '-',
+    \ 'c'      : 'C',
+    \ 'i'      : 'I',
+    \ 'ic'     : 'I',
+    \ 'ix'     : 'I',
+    \ 'n'      : 'N',
+    \ 'multi'  : 'M',
+    \ 'ni'     : 'N',
+    \ 'no'     : 'N',
+    \ 'R'      : 'R',
+    \ 'Rv'     : 'R',
+    \ 's'      : 'S',
+    \ 'S'      : 'S',
+    \ ''     : 'S',
+    \ 't'      : 'T',
+    \ 'v'      : 'V',
+    \ 'V'      : 'V',
+    \ ''     : 'V',
+    \ }
