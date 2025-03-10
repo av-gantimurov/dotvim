@@ -10,7 +10,7 @@ set autoindent
 set ignorecase
 set smartcase
 
-set makeprg=card-report\ --strict\ --no-color\ --mitre\ en\ --overwrite\ -sO/tmp/report\ %
+set makeprg=card-report\ --strict\ --no-color\ --mitre\ en\ --overwrite\ -sO/tmp/report\ \"%\"
 set errorformat^=%*[^:]:\ %f:\ %m
 set errorformat^=%*[^:]:\ %f:%l\ %m
 set errorformat^=%*[^:]:\ %f:%l:%c\ %m
