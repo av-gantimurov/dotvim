@@ -35,7 +35,7 @@ endif
 syntax case match
 
 " Keywords
-syntax keyword yaraKeyword all and any ascii at condition entrypoint false filesize for fullword global import in include int16 int16be int32 int32be int8 int8be matches meta nocase not of or xor private rule strings them true uint16 uint16be uint32 uint32be uint8 uint8be wide contains
+syntax keyword yaraKeyword all and any ascii at condition entrypoint false filesize for fullword global import in include int16 int16be int32 int32be int8 int8be matches meta nocase not of or xor private rule strings them true uint16 uint16be uint32 uint32be uint8 uint8be wide base64 base64wide contains
 syntax keyword yaraKeywordMeta author description hash reference date rev tags minimum_yara score required_modules link
 syntax keyword yaraRuleSection condition meta strings
 
@@ -93,3 +93,5 @@ set smartindent
 
 " Make sure that the syntax file is loaded at most once.
 let b:current_syntax = "yara"
+"# let @a = ':try|s/"/\\"/g|catch||endtry:try|s/\\/\\\\/g|catch||endtryI		$s1 = "€ýkA" ascii wide€ýkj'
+let @a = ':s/"/\\"/ge:s/\\/\\\\/geI		$s1 = "€ýkA" ascii wide€ýk:let @/ = ""'
