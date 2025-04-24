@@ -120,7 +120,7 @@ if exists('*minpac#init')
     call minpac#add('k-takata/minpac', {'type': 'opt'})
 
     " Additional plugins here.
-    call minpac#add('nvie/vim-flake8')
+    " call minpac#add('nvie/vim-flake8')
     call minpac#add('tpope/vim-fugitive')
     call minpac#add('chrisbra/csv.vim')
     call minpac#add('dense-analysis/ale')
