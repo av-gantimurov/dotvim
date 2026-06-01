@@ -1,1 +1,1 @@
-setlocal makeprg=yara\ -s\ %\ .
+setlocal makeprg=yr\ scan\ -r\ %\ .

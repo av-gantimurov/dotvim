@@ -37,7 +37,7 @@ syntax case match
 " Keywords
 syntax keyword yaraKeyword all and any ascii at condition entrypoint false filesize for fullword global import in include int16 int16be int32 int32be int8 int8be matches meta nocase not of or xor private rule strings them true uint16 uint16be uint32 uint32be uint8 uint8be wide base64 base64wide contains
 " syntax keyword yaraKeywordMeta author description hash reference date rev tags minimum_yara score required_modules version copyright tlp link last_modified platform
-syntax keyword yaraKeywordMeta author description id date modified reference source_url license_url logic_hash score quality tags tlp platform version hash
+syntax keyword yaraKeywordMeta author description id date modified reference source_url license_url logic_hash score quality tags tlp platform version hash importance
 syntax keyword yaraRuleSection condition meta strings
 
 syntax match yaraMetaHash /\<hash[0-9]*\>/

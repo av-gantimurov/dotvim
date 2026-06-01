@@ -250,7 +250,8 @@ endif
 let g:netrw_winsize = 30
 
 let g:ale_linters = {
-\   'rust': ['cargo', 'rls']
+\   'rust': ['cargo', 'rls'],
+\   'yara': ['yarax'],
 \}
 
 let g:ale_rust_rls_toolchain = 'stable'
@@ -262,7 +263,7 @@ let g:ale_fixers = {
 let g:ale_fix_on_save = 1
 
 
-let g:XkbSwitchEnabled = 1
+" let g:XkbSwitchEnabled = 1
 " let g:XkbSwitchNLayout = 'us'
 let g:XkbSwitchKeymapNames = {'Russian' : 'ru'}
 
